@@ -71,7 +71,7 @@ class Contact {
   }
 
   //Create  a  method to display contact details
-  printContact() {
+  displayContact() {
     //print the details
     console.log(`Name: ${this.firstName} ${this.lastName}`);
     console.log(
@@ -85,7 +85,8 @@ class Contact {
 //Create a class AddressBook to store the contacts
 class AddressBook {
   //Create a constructor to initialize variable
-  constructor() {
+  constructor(addressBookName) {
+    this.addressBookName = addressBookName;
     this.contacts = [];
   }
 
@@ -106,29 +107,37 @@ class AddressBook {
     console.log("All Contacts are: \n");
     this.contacts.forEach((contact) => {
       //Call the method
-      contact.printContact();
+      contact.displayContact();
     });
   }
 }
 
-//Create an object of AddressBook
-const addressBook = new AddressBook();
+//Create an object to store the Multiple address books
+const addressBookList = [];
+
+//Create objects of AddressBook
+const addressBook1 = new AddressBook("Personal Book");
+addressBookList.push(addressBook1); //add to addressBookList
+
+//Create anthor object of AddressBook
+const addressBook2 = new AddressBook("Work Book");
+addressBookList.push(addressBook2); //add to addressBookList
 
 //Use try block
 try {
   //Create an object of contact class
   const contact1 = new Contact(
-    "Anchal",
-    "Sahu",
-    "Green Park Colony",
+    "Sunil",
+    "Meena",
+    "Ashok Bihar",
     "Bhopal",
     "Madhya Pradesh",
-    "462001",
-    "4589673589",
-    "Sahuanchal22@gmail.com"
+    "462022",
+    "5656362655",
+    "sunilmeena01@gmail.com"
   );
   //Call the method to add contact
-  addressBook.addContact(contact1);
+  addressBook1.addContact(contact1);
 } catch (error) {
   //Catch block to handle the error
   //Print the error
@@ -149,12 +158,15 @@ try {
     "sharma3165@gmail.com"
   );
   //Call the method to add contact
-  addressBook.addContact(contact2);
+  addressBook2.addContact(contact2);
 } catch (error) {
   //Catch block to handle the error
   //Print the error
   console.log(error.message);
 }
 
-// Display all contacts
-addressBook.displayAllContacts();
+//Display all the contact
+addressBookList.forEach((val) => {
+  //Call the display method
+  val.displayAllContacts();
+});
