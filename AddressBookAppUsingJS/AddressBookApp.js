@@ -71,7 +71,7 @@ class Contact {
   }
 
   //Create  a  method to display contact details
-  displayContact() {
+  printContact() {
     //print the details
     console.log(`Name: ${this.firstName} ${this.lastName}`);
     console.log(
@@ -91,7 +91,7 @@ class AddressBook {
   }
 
   //Create a  method to add a new contact
-  addContact(contact) {
+  addContactDetails(contact) {
     this.contacts.push(contact);
   }
 
@@ -104,11 +104,39 @@ class AddressBook {
     }
 
     //print the statement
-    console.log("All Contacts are: \n");
+    console.log(`\nAll Contacts of ${this.addressBookName} are: \n`);
     this.contacts.forEach((contact) => {
       //Call the method
-      contact.displayContact();
+      contact.printContact();
     });
+  }
+
+  //Create a function to find and edit the details
+  findAndEditContactDetails(firstName, lastName, updatedDetails) {4
+    //Create a const variable to find the contact
+    const contact = this.contacts.find(
+      (c) => c.firstName === firstName && c.lastName === lastName
+    );
+
+    //Check the contact and return the result
+    if (!contact) {
+      //print the statement if contact is not found
+      console.log("Contact not found.");
+      return;
+    }
+
+    //check the updatedDetails and edit the details
+    if (updatedDetails.firstName) contact.firstName = updatedDetails.firstName;
+    if (updatedDetails.lastName) contact.lastName = updatedDetails.lastName;
+    if (updatedDetails.address) contact.address = updatedDetails.address;
+    if (updatedDetails.city) contact.city = updatedDetails.city;
+    if (updatedDetails.state) contact.state = updatedDetails.state;
+    if (updatedDetails.zip) contact.zip = updatedDetails.zip;
+    if (updatedDetails.phoneNumber) contact.phoneNumber = updatedDetails.phoneNumber;
+    if (updatedDetails.email) contact.email = updatedDetails.email;
+
+    //Print the  statement if contact updated 
+    console.log("Contact updated successfully!");
   }
 }
 
@@ -121,23 +149,20 @@ addressBookList.push(addressBook1); //add to addressBookList
 
 //Create anthor object of AddressBook
 const addressBook2 = new AddressBook("Work Book");
-addressBookList.push(addressBook2); //add to addressBookList
+addressBookList.push(addressBook2);//add to addressBookList
 
 //Use try block
 try {
   //Create an object of contact class
-  const contact1 = new Contact(
-    "Sunil",
-    "Meena",
-    "Ashok Bihar",
-    "Bhopal",
-    "Madhya Pradesh",
-    "462022",
-    "5656362655",
-    "sunilmeena01@gmail.com"
-  );
+  const contact1 = new Contact("Sunil","Meena","Ashok Bihar","Bhopal","Madhya Pradesh","462022","565623141819","sunilmeena01@gmail.com");
   //Call the method to add contact
-  addressBook1.addContact(contact1);
+  addressBook1.addContactDetails(contact1);
+
+  //Create an object of contact class
+  const contact3 = new Contact("Mohit","Sharma","Arera Ayodhya Nagar","Indore","Madhya Pradesh","235689","4578895612","mohit5656@gmail.com");
+  //Call the method to add contact
+  addressBook1.addContactDetails(contact3);
+
 } catch (error) {
   //Catch block to handle the error
   //Print the error
@@ -147,26 +172,32 @@ try {
 //USe try block
 try {
   //Create an object of contact class
-  const contact2 = new Contact(
-    "Mohit",
-    "Sharma",
-    "Anand Nagar",
-    "Neelbad",
-    "Madhya Pradesh",
-    "462022",
-    "5653414865",
-    "sharma3165@gmail.com"
-  );
+  const contact2 = new Contact("Nilesh","Yadav","Arjun Nagar","Mandideep","Madhya Pradesh","656651","5653414865","yadav3165@gmail.com");
   //Call the method to add contact
-  addressBook2.addContact(contact2);
+  addressBook2.addContactDetails(contact2);
+
+  //Create an object of contact class
+  const contact4 = new Contact("Aman","Rajput","Amedkar Nagar","PrayagRaj","Uttar Pradesh","258964","7583414865","AmanR865@gmail.com");
+  //Call the method to add contact
+  addressBook2.addContactDetails(contact4);
 } catch (error) {
   //Catch block to handle the error
   //Print the error
   console.log(error.message);
 }
 
-//Display all the contact
+//Print the all contact details
 addressBookList.forEach((val) => {
-  //Call the display method
+  //Call the method and display contact details
   val.displayAllContacts();
 });
+
+//Call the method to find and edit the details
+console.log("\nUpdate contact: \n");
+addressBook1.findAndEditContactDetails("Anuj","Sharma",{ city:"Jaipur",
+  state :"Rajasthan"
+});
+
+//Call the function to print details
+console.log("After updating....");
+addressBook1.displayAllContacts();
