@@ -96,7 +96,7 @@ class AddressBook {
   }
 
   //Create a Method to display all contacts
-  displayAllContactsDetails() {
+  displayAllContacts() {
     if (this.contacts.length === 0) {
       //print the statement
       console.log("No contacts found.");
@@ -159,6 +159,11 @@ class AddressBook {
     //Print the result
     console.log(`Contact ${firstName} ${lastName} deleted successfully!\n`);
   }
+
+  //Create a function to find the count the contact
+  getNumberOfContacts() {
+    return this.contacts.reduce((count) => count + 1, 0);
+  }
 }
 
 //Create an object to store the Multiple address books
@@ -186,7 +191,7 @@ try {
     "sunilmeena01@gmail.com"
   );
   //Call the method to add contact
-  addressBook1.H(contact1);
+  addressBook1.addContactDetails(contact1);
 
   //Create an object of contact class
   const contact3 = new Contact(
@@ -245,7 +250,7 @@ try {
 //Display all the contact
 addressBookList.forEach((val) => {
   //Call the display method
-  val.displayAllContactsDetails();
+  val.displayAllContacts();
 });
 
 //Call the method to find and edit the details
@@ -255,9 +260,16 @@ addressBook1.findAndEditContactDetails("Anuj", "Sharma", {
   state: "Rajasthan",
 });
 
-//Call the function to delete contact
 addressBook1.findAndDeleteContactDetails("Anuj", "Sharma");
 
-//call the display method
-console.log("After Deleting");
-addressBook1.displayAllContactsDetails();
+//Print the total number of contact
+console.log(
+  `Total Number of Contact in ${
+    addressBook1.addressBookName
+  }: ${addressBook1.getNumberOfContacts()}`
+);
+console.log(
+  `Total Number of Contact in ${
+    addressBook2.addressBookName
+  }: ${addressBook2.getNumberOfContacts()}`
+);
